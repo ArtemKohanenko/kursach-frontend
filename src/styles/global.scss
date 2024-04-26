@@ -1,0 +1,21 @@
+html {
+  background-color: $color-background;
+  font-family: $font-primary;
+  color: $color-primary-text;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
