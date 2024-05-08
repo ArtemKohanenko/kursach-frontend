@@ -7,8 +7,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
-    (config.params.apikey = import.meta.env.VITE_PUBLIC_API_KEY),
-      (config.params.ts = Date.now());
+    config.params.headers = { Authorization: `Bearer ${import.meta.env.VITE_KEY}` }
     return config;
   },
   function (error) {
