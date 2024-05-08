@@ -1,14 +1,14 @@
 import { NavLink } from "react-router-dom";
-import classes from "./Header.module.scss";
+import classes from "./TeacherHeader.module.scss";
 
-const Header = () => {
+const TeacherHeader = () => {
   return (
     <header className={classes.container}>
       <img className={classes.logo} src="src/assets/Logo.png"></img>
       <nav>
         <ul className={classes.links}>
           <li>
-            <NavLink to="characters" className={classes.navLink}>
+            <NavLink to="teacher/management" className={classes.navLink}>
               {({ isActive }) => (
                 <a className={isActive ? classes.linkActive : classes.link}>
                   Управление работами
@@ -17,7 +17,7 @@ const Header = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="comics" className={classes.navLink}>
+            <NavLink to="teacher/checking" className={classes.navLink}>
               {({ isActive }) => (
                 <span className={isActive ? classes.linkActive : classes.link}>
                   Проверка работ
@@ -31,4 +31,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default TeacherHeader;

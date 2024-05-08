@@ -4,6 +4,9 @@ import Characters from "./routes/Characters/Characters";
 import NoMatch from "./routes/NoMatch/NoMatch";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Login from "./routes/Login/Login";
+import Student from "./routes/Student/Student";
+import Teacher from "./routes/Teacher/Teacher";
 
 function App() {
   const routes: RouteObject[] = [
@@ -14,10 +17,21 @@ function App() {
         {
           index: true,
           path: "/",
-          element: <Navigate to="checking" />,
+          element: <Login/>,
         },
         {
-          path: "/checking",
+          path: "/student",
+          children: [
+            { index: true, element: <Navigate to="/student/sended" /> },
+            { path: "/student/sended", element: <Student/> },
+          ],
+        },
+        {
+          path: "/teacher",
+          children: [
+            { index: true, element: <Navigate to="/teacher/checking" /> },
+            { path: "/teacher/checking", element: <Teacher/> },
+          ],
         },
         { path: "*", element: <NoMatch /> },
       ],
