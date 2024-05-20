@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import authStore from "../../stores/AuthStore";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_ADDRESS,
@@ -7,7 +8,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   function (config) {
-    config.params.headers = { Authorization: `Bearer ${import.meta.env.VITE_KEY}` }
+    config.headers.Authorization = `Bearer ${authStore.accessToken}`
     return config;
   },
   function (error) {
