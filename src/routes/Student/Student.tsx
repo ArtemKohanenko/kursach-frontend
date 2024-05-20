@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import authStore from "../../stores/AuthStore";
 import classes from "./Student.module.scss";
+import StudentSendedTable from "../../components/Tables/StudentSendedTable/StudentSendedTable";
+import TableWrapper from "../../components/TableWrapper/TableWrapper";
 
 const Student = () => {
     const { login } = authStore;
@@ -9,7 +11,12 @@ const Student = () => {
         login('Виктор Власов', '123');
     })
     
-    return (<>Вы студент.</>)
+    return (
+        <TableWrapper title="Отправленные работы">
+            <StudentSendedTable/>
+        </TableWrapper>
+        
+    )
 }
 
 export default Student;

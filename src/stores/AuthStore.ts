@@ -19,7 +19,6 @@ class AuthStore {
         runInAction(() => {
             this.accessToken = data.access_token;
         });
-        console.log(this.accessToken)
 
         await this.getCurrentProfile();        
     }
@@ -31,7 +30,6 @@ class AuthStore {
         runInAction(() => {
             this.profile = data;
         })
-        console.log(this.profile)
     }
 }
 
