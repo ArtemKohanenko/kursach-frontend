@@ -1,7 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import TableHeader from '../../TableHeader/TableHeader';
 import classes from './StudentSendedTable.module.scss';
-import sendedSorksStore from '../../../stores/SendedWorksStore';
+import studentStore from '../../../stores/StudentStore';
 import SendWorkModal from '../../Modals/SendWork/SendWorkModal';
 import { useState } from 'react';
 
