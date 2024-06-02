@@ -1,0 +1,29 @@
+.wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: 400px;
+        background-color: white;
+
+        .footer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            .button {
+                width: 30px;
+            }
+        }
+    }
+}
