@@ -31,7 +31,7 @@ const StudentSendedTable = () => {
     }
 
     return (
-        <div>
+        <>
             <TableHeader onOpen={openModal} />
             <DataGrid
                 className={classes.table}
@@ -45,7 +45,7 @@ const StudentSendedTable = () => {
                 pageSizeOptions={[5, 10]}
             />
             <SendWorkModal active={showModal} onClose={closeModal} onSubmit={submit}></SendWorkModal>
-        </div>
+        </>
     );
 }
 
