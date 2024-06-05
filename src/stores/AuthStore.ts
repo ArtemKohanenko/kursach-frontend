@@ -1,8 +1,12 @@
-import { action, observable, runInAction } from "mobx";
+import { action, makeObservable, observable, runInAction } from "mobx";
 import { getCurrentProfile, login } from "../api/auth";
 import { IUser } from "../types/user";
 
 class AuthStore {
+    constructor() {
+        makeObservable(this);
+    }
+      
     @observable
     isLogin: boolean = false;
 
