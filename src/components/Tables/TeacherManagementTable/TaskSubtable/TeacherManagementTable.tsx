@@ -4,9 +4,27 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ITask from '../../../../types/task';
 import { MdDeleteOutline } from "react-icons/md";
 import IconButton from "@mui/material/IconButton/IconButton";
+import { useState } from "react";
+import DeleteTaskModal from "../../../Modals/DeleteTaskModal/DeleteTaskModal";
+import { observer } from "mobx-react-lite";
 
 
 const TaskSubtable = (props: {tasks: ITask[]}) => {
+
+  const tasks = props.tasks;
+
+  // Delete Task from Course
+  const [isShowDeleteTaskModal, setIsShowDeleteTaskModal] = useState(false);
+  const [deleteTaskCourseId, setDeleteTaskCourseId] = useState<string>('');
+  const closeDeleteModal = () => {
+    setIsShowDeleteTaskModal(false);
+  }
+  const openDeleteTaskModel = (courseId: string) => {
+    setDeleteTaskCourseId(courseId);
+    setIsShowDeleteTaskModal(true);
+  }
+
+
   const columnNames = [ "Работа", "Комментарии" ];
   const columns: any = columnNames.map(colName => {
     return {
@@ -33,15 +51,15 @@ const TaskSubtable = (props: {tasks: ITask[]}) => {
           </TableCell>
         )
       },
-      customBodyRender: () => (
-        <IconButton>
+      customBodyRender: (_: any, tableMeta: any) => (
+        <IconButton onClick={() => openDeleteTaskModel(tasks[tableMeta.rowIndex].id)}>
           <MdDeleteOutline />
         </IconButton>
       ),
     }
   })
 
-  const data = props.tasks.map(task => [ task.name, task.comment ] )
+  const data = tasks.map(task => [ task.name, task.comment ] )
 
 
   const options: any = {
@@ -120,9 +138,10 @@ const TaskSubtable = (props: {tasks: ITask[]}) => {
         options={options}
       />
     </ThemeProvider>
+    <DeleteTaskModal taskId={deleteTaskCourseId} active={isShowDeleteTaskModal} onClose={closeDeleteModal} /> 
     </>
   )
 
 }
 
-export default TaskSubtable;
+export default observer(TaskSubtable);
