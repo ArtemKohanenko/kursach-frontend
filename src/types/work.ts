@@ -1,10 +1,12 @@
-interface Work {
+import ITask from "./task";
+import { IStudent, ITeacher } from "./user";
+
+export interface IWork {
     id: string;
-    task: string;
-    subject: string;
-    student: string
-    teacher: string;
+    comment?: string;
+    data: string;
     status: string;
-    date: Date;
-    commits?: number
+    task: ITask;
+    student: IStudent
+    teacher: ITeacher;
 }
