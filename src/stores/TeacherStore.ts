@@ -115,6 +115,10 @@ class TeacherStore {
             });
         }
     };
+
+    getCourseById = (id: string) => {
+        return this.courses.find(course => course.id == id)
+    }
 }
 
 

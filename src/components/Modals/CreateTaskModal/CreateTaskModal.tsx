@@ -2,6 +2,7 @@ import BigButton from '../../BigButton/BigButton';
 import classes from './CreateTaskModal.module.scss';
 import { MdOutlineUpload } from "react-icons/md";
 import { useForm } from 'react-hook-form';
+import teacherStore from '../../../stores/TeacherStore';
 
 type CreateTaskModalProps = {
     courseId: string;
@@ -11,6 +12,9 @@ type CreateTaskModalProps = {
 };
 
 const CreateTaskModal = ({ courseId, active, onClose}: CreateTaskModalProps) => {
+
+    const { getCourseById, createTask } = teacherStore;
+
     const { 
         register,
         formState: { isValid },
@@ -18,8 +22,8 @@ const CreateTaskModal = ({ courseId, active, onClose}: CreateTaskModalProps) => 
         reset,
     } = useForm({mode: "onBlur"});
 
-    const onSubmit = (data: unknown) => {
-        alert(JSON.stringify(data))
+    const onSubmit = (data: {comment: string, name: string}) => {
+        createTask({ ...data, courseId: courseId })
         reset();
     }
 
@@ -27,12 +31,15 @@ const CreateTaskModal = ({ courseId, active, onClose}: CreateTaskModalProps) => 
         return null;
     }
 
+    const course = getCourseById(courseId);
+
     return (
         <div className={classes.wrapper} onClick={onClose}>
             <div className={classes.container} onClick={(event) => event.stopPropagation()}>
                 <div className={classes.header}>
                     <MdOutlineUpload className={classes.image} />
-                    <h2 className={classes.header_title}>Создать задание, ид {courseId}</h2>
+                    <h2 className={classes.header_title}>Создать задание</h2>
+                    <h3 className={classes.header_title}>для курса {course?.name}</h3>
                 </div>
 
                 <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
