@@ -128,10 +128,17 @@
             
             input:disabled {
                 opacity: 0.4;
+                cursor: default;
             }
             
             input[type="button"]:hover {
                 transition: 0.3s all;
+            }
+
+            .sendbutton {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
         }
 

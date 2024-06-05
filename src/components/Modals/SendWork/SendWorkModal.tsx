@@ -54,8 +54,9 @@ const SendWorkModal = ({ active, onClose}: SendWorkModalProps) => {
                         Комментарий к работе
                         <textarea {...register("comment")} />
                     </label>
-
-                    <input type='submit' disabled={!isValid}></input>
+                    <div className={classes.sendbutton}>
+                        <input type='submit' disabled={!isValid}></input>
+                    </div>
                 </form>
             </div>
         </div>
