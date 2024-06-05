@@ -335,6 +335,11 @@
   resolved "https://registry.npmjs.org/@emotion/weak-memoize/-/weak-memoize-0.3.1.tgz"
   integrity sha512-EsBwpc7hBUJWAsNPBmJy4hxWx12v6bshQsldrVmjxJoc3isbxhOrF2IcCpaXxfvq03NwkI7sbsOLXbYuqF/8Ww==
 
+"@esbuild/win32-x64@0.19.12":
+  version "0.19.12"
+  resolved "https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.19.12.tgz"
+  integrity sha512-T1QyPSDCyMXaO3pzBkF96E8xMkiRYbUEZADd29SyPGabqxMViNoii+NcK7eWJAEoU6RZyEm5lVSIjTmcdoB9HA==
+
 "@eslint-community/eslint-utils@^4.2.0", "@eslint-community/eslint-utils@^4.4.0":
   version "4.4.0"
   resolved "https://registry.npmjs.org/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz"
@@ -631,15 +636,10 @@
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.15.3.tgz"
   integrity sha512-Oy8rmScVrVxWZVOpEF57ovlnhpZ8CCPlnIIumVcV9nFdiSIrus99+Lw78ekXyGvVDlIsFJbSfmSovJUhCWYV3w==
 
-"@rollup/rollup-linux-x64-gnu@4.12.0":
+"@rollup/rollup-win32-x64-msvc@4.12.0":
   version "4.12.0"
-  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-gnu/-/rollup-linux-x64-gnu-4.12.0.tgz"
-  integrity sha512-TenQhZVOtw/3qKOPa7d+QgkeM6xY0LtwzR8OplmyL5LrgTWIXpTQg2Q2ycBf8jm+SFW2Wt/DTn1gf7nFp3ssVA==
-
-"@rollup/rollup-linux-x64-musl@4.12.0":
-  version "4.12.0"
-  resolved "https://registry.npmjs.org/@rollup/rollup-linux-x64-musl/-/rollup-linux-x64-musl-4.12.0.tgz"
-  integrity sha512-LfFdRhNnW0zdMvdCb5FNuWlls2WbbSridJvxOvYWgSBOYZtgBfW9UGNJG//rwMqTX1xQE9BAodvMH9tAusKDUw==
+  resolved "https://registry.npmjs.org/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.12.0.tgz"
+  integrity sha512-ZYmr5mS2wd4Dew/JjT0Fqi2NPB/ZhZ2VvPp7SmvPZb4Y1CG/LRcS6tcRo2cYU7zLK5A7cdbhWnnWmUjoI4qapg==
 
 "@tootallnate/once@1":
   version "1.1.2"
@@ -2814,6 +2814,11 @@ react-dom@^17.0.0, react-dom@^17.0.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-hook-form@^7.51.5:
+  version "7.51.5"
+  resolved "https://registry.npmjs.org/react-hook-form/-/react-hook-form-7.51.5.tgz"
+  integrity sha512-J2ILT5gWx1XUIJRETiA7M19iXHlG74+6O3KApzvqB/w8S5NQR7AbU8HVZrMALdmDgWpRPYiZJl0zx8Z4L2mP6Q==
 
 react-icons@^5.2.1:
   version "5.2.1"
