@@ -15,6 +15,10 @@ interface IGetTasksResponse {
     data: ITask[];
 }
 
+interface IDeleteTasksResponse {
+    status: number;
+}
+
 export const getStudentTasks = () => {
     return axios.get<IGetTasksResponse>('/task/student');
 };
@@ -24,5 +28,5 @@ export const createTask = (body: ICreateTask) => {
 };
 
 export const deleteTask = (taskId: string) => {
-    return axios.delete(`/task/${taskId}`);
+    return axios.delete<IDeleteTasksResponse>(`/task/${taskId}`);
 };

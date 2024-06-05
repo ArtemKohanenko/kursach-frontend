@@ -8,7 +8,7 @@ type CreateTaskModalProps = {
     courseId: string;
     active: boolean;
     onClose: () => void;
-    onSubmit: () => void;
+    onSubmit?: () => void;
 };
 
 const CreateTaskModal = ({ courseId, active, onClose}: CreateTaskModalProps) => {
@@ -25,6 +25,7 @@ const CreateTaskModal = ({ courseId, active, onClose}: CreateTaskModalProps) => 
     const onSubmit = (data: {comment: string, name: string}) => {
         createTask({ ...data, courseId: courseId })
         reset();
+        onClose();
     }
 
     if (!active) {

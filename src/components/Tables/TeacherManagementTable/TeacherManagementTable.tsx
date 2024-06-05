@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import teacherStore from '../../../stores/TeacherStore';
 import { useEffect, useState } from "react";
 import CreateTaskModal from "../../Modals/CreateTaskModal/CreateTaskModal";
+import DeleteTaskModal from "../../Modals/DeleteTaskModal/DeleteTaskModal";
 
 const TeacherManagementTable = () => {
   const { courses, createTask } = teacherStore;
@@ -131,6 +132,7 @@ const TeacherManagementTable = () => {
       />
     </ThemeProvider>
     <CreateTaskModal courseId={createTaskCourseId} active={isShowCreateTaskModal} onClose={closeCreateModal} onSubmit={submitCreateTaskModal}></CreateTaskModal>
+
     </>
   )
 
