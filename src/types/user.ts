@@ -1,3 +1,5 @@
+import { ITeacher } from "./teacher";
+
 export interface IUser {
     id: string;
     name: string;
@@ -5,9 +7,9 @@ export interface IUser {
     student?: IStudent;
 }
 
-export interface ITeacher {
-    id: string;
-}
+//export interface ITeacher {
+    //id: string;
+//}
 
 export interface IStudent {
     id: string;
