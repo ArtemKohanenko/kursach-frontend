@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 113px;
+    height: 40px;
+    background: #FFFFFF;
+    border: 1px solid #C6C2DE;
+    border-radius: 6px;
+
+    .text {
+        font-family: Inter;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19px;
+    }
+}
