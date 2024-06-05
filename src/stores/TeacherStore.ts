@@ -22,6 +22,7 @@ class TeacherStore {
       
       runInAction(() => {
         this.courses = data.data;
+        console.log(this.courses)
       });
     } catch (error) {
       console.error(error);

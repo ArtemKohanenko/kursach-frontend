@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import IconButton from '@mui/material/IconButton/IconButton';
 import teacherStore from '../../../stores/TeacherStore';
+import { useEffect } from "react";
 
 const TeacherManagementTable = () => {
   const { courses } = teacherStore;
@@ -48,7 +49,6 @@ const TeacherManagementTable = () => {
     const groupsString = course.groups?.map(group => group.name).sort().toString();
     return [ course.name, course.subject, groupsString, course.tasks?.length ]
   })
-  console.log(data)   // без этого почему то data считается пустой
   
   const options: any = {
     filterType: "dropdown",
