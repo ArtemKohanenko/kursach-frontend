@@ -48,6 +48,7 @@ const TeacherManagementTable = () => {
     const groupsString = course.groups?.map(group => group.name).sort().toString();
     return [ course.name, course.subject, groupsString, course.tasks?.length ]
   })
+  console.log(data)   // без этого почему то data считается пустой
   
   const options: any = {
     filterType: "dropdown",
