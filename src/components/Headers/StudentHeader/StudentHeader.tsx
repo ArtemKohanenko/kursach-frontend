@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom";
 import classes from "./StudentHeader.module.scss";
+import { useEffect } from "react";
+import authStore from "../../../stores/AuthStore";
 
 const StudentHeader = () => {
+
   return (
     <header className={classes.container}>
       <img className={classes.logo} src="src/assets/Logo.png"></img>

@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./routes/Login/Login";
 import Student from "./routes/Student/Student";
 import Teacher from "./routes/Teacher/Teacher";
+import TeacherTasksManagement from "./routes/TeacherTasksManagement/TeacherTasksManagement";
 
 function App() {
   const routes: RouteObject[] = [
@@ -31,6 +32,7 @@ function App() {
           children: [
             { index: true, element: <Navigate to="/teacher/checking" /> },
             { path: "/teacher/checking", element: <Teacher/> },
+            { path: "/teacher/management", element: <TeacherTasksManagement /> }
           ],
         },
         { path: "*", element: <NoMatch /> },
