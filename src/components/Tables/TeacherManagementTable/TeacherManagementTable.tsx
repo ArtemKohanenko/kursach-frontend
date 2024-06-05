@@ -7,10 +7,25 @@ import { observer } from 'mobx-react-lite';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import IconButton from '@mui/material/IconButton/IconButton';
 import teacherStore from '../../../stores/TeacherStore';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import CreateTaskModal from "../../Modals/CreateTaskModal/CreateTaskModal";
 
 const TeacherManagementTable = () => {
-  const { courses } = teacherStore;
+  const { courses, createTask } = teacherStore;
+
+  // Create Task for Course
+  const [isShowCreateTaskModal, setIsShowCreateTaskModal] = useState(false);
+  const [createTaskCourseId, setCreateTaskCourseId] = useState<string>('');
+  const submitCreateTaskModal = () => {
+  }
+  const closeCreateModal = () => {
+    setIsShowCreateTaskModal(false);
+  }
+  const openCreateTaskModel = (courseId: string) => {
+    setCreateTaskCourseId(courseId);
+    setIsShowCreateTaskModal(true);
+  }
+  
 
   const columnNames = ["КУРС", "ДИСЦИПЛИНА", "ГРУППЫ", "КОЛИЧЕСТВО"];
   const columns: any = columnNames.map(colName => {
@@ -37,8 +52,8 @@ const TeacherManagementTable = () => {
           </TableCell>
         )
       },
-      customBodyRender: () => (
-        <IconButton aria-label="delete">
+      customBodyRender: (_: any, tableMeta: any) => (
+        <IconButton onClick={() => openCreateTaskModel(courses[tableMeta.rowIndex].id)} aria-label="delete">
           <IoIosAddCircleOutline />
         </IconButton>
       ),
@@ -115,6 +130,7 @@ const TeacherManagementTable = () => {
         options={options}
       />
     </ThemeProvider>
+    <CreateTaskModal courseId={createTaskCourseId} active={isShowCreateTaskModal} onClose={closeCreateModal} onSubmit={submitCreateTaskModal}></CreateTaskModal>
     </>
   )
 

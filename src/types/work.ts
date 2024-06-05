@@ -6,7 +6,7 @@ export interface IWork {
     comment?: string;
     data: string;
     status: string;
-    task: ITask;
+    task: ITask;    
     student: IStudent
     teacher: ITeacher;
 }
