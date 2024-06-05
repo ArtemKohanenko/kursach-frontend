@@ -4,6 +4,7 @@ import classes from './StudentSendedTable.module.scss';
 import studentStore from '../../../stores/StudentStore';
 import SendWorkModal from '../../Modals/SendWork/SendWorkModal';
 import { useState } from 'react';
+import studentStore from '../../../stores/StudentStore';
 
 
 const columns = [
@@ -15,7 +16,7 @@ const columns = [
   ];
 
 const StudentSendedTable = () => {
-    const { sendedWorks } = sendedSorksStore;
+    const { sendedWorks } = studentStore;
     const [showModal, setShowModal] = useState(false);
 
     const closeModal = () => {
