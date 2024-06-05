@@ -1,10 +1,14 @@
-import { action, observable, runInAction } from "mobx";
+import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import ICourse from "../types/course";
 import { deleteCourse, getCourses } from "../api/course";
 import { ICreateTask, createTask, deleteTask } from "../api/task";
 import { IWork } from "../types/work";
 
 class TeacherStore {
+    constructor() {
+        makeObservable(this);
+    }
+      
     @observable
     courses: ICourse[] = [];
 
