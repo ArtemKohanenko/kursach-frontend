@@ -1,6 +1,6 @@
 import { DataGrid } from '@mui/x-data-grid/DataGrid';
 import classes from "./StudentSendedTable.module.scss";
-import sendedSorksStore from '../../../stores/SendedWorksStore';
+import studentStore from '../../../stores/StudentStore';
 
 
 const columns = [
@@ -12,7 +12,7 @@ const columns = [
   ];
 
 const StudentSendedTable = () => {
-    const { sendedWorks } = sendedSorksStore;
+    const { sendedWorks } = studentStore;
     return (
         <DataGrid
             className={classes.table}

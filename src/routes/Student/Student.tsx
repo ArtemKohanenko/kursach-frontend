@@ -8,7 +8,7 @@ const Student = () => {
     const { login } = authStore;
 
     useEffect(() => {
-        login('Виктор Власов', '123');
+        login('Фашист', '123');
     })
     
     return (
