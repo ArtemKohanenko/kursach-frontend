@@ -1,4 +1,3 @@
-import BigButton from '../../BigButton/BigButton';
 import classes from './SendWorkModal.module.scss';
 import { MdOutlineUpload } from "react-icons/md";
 import { useForm } from 'react-hook-form';
@@ -6,7 +5,6 @@ import { useForm } from 'react-hook-form';
 type SendWorkModalProps = {
   active: boolean;
   onClose: () => void;
-  onSubmit: () => void;
 };
 
 const SendWorkModal = ({ active, onClose}: SendWorkModalProps) => {
