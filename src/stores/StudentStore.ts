@@ -45,6 +45,7 @@ class StudentStore {
       
       runInAction(() => {
         this.sendedWorks = data.data;
+        console.log(data.data)
       });
     } catch (error) {
       console.error(error);
@@ -63,8 +64,9 @@ class StudentStore {
           const { data } = await createWork(params);
 
           runInAction(() => {
-              const work = data.data;
-              this.sendedWorks.push(work);
+              // const work = data.data;
+              // this.sendedWorks.push(work);
+              this.loadWorks()
           });
       } catch (error) {
           console.error(error);
@@ -74,7 +76,6 @@ class StudentStore {
           });
       }
     };
-
 }
 
 const studentStore = new StudentStore();
