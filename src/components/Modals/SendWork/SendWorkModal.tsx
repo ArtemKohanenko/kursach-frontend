@@ -1,6 +1,9 @@
 import classes from './SendWorkModal.module.scss';
 import { MdOutlineUpload } from "react-icons/md";
 import { useForm } from 'react-hook-form';
+import studentStore from '../../../stores/StudentStore';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 
 type SendWorkModalProps = {
   active: boolean;
@@ -8,6 +11,17 @@ type SendWorkModalProps = {
 };
 
 const SendWorkModal = ({ active, onClose}: SendWorkModalProps) => {
+
+    if (!active) {
+        return null;
+    }
+
+    const { sendWork, loadTasks, tasks } = studentStore;
+
+    useEffect(() => {
+        loadTasks();
+    }, [])
+
     const { 
         register,
         formState: { isValid },
@@ -15,13 +29,10 @@ const SendWorkModal = ({ active, onClose}: SendWorkModalProps) => {
         reset,
     } = useForm({mode: "onBlur"});
 
-    const onSubmit = (data: unknown) => {
-        alert(JSON.stringify(data))
+    const onSubmit = (data: {comment: string, data: string, taskId: string}) => {
+        sendWork(data);
         reset();
-    }
-
-    if (!active) {
-        return null;
+        onClose();
     }
 
     return (
@@ -34,24 +45,24 @@ const SendWorkModal = ({ active, onClose}: SendWorkModalProps) => {
 
                 <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
                     <label>
-                        Название задания
-                        <input {...register('exercise', { required: true })} placeholder='ООАиП'/>
-                    </label>
-                    <label>
-                        Дисциплина
-                        <select {...register("subject", { required: true })}>
-                            <option value="ooaip">ООАиП</option>
-                            <option value="practicum">Практикум</option>
+                        Задание
+                        <select {...register("taskId", { required: true })}>
+                            {
+                                tasks.map(task => (
+                                    <option value={task.id}>{task.name}</option>
+                                ))
+                            }
                         </select>
                     </label>
                     <label>
-                        Ссылка на задание
-                        <input type="url" placeholder="https://github.com/" {...register("link", {required: true})} />
+                        Ссылки на материалы
+                        <textarea {...register("data")} />
                     </label>
                     <label>
                         Комментарий к работе
                         <textarea {...register("comment")} />
                     </label>
+                    
                     <div className={classes.sendbutton}>
                         <input type='submit' disabled={!isValid}></input>
                     </div>
