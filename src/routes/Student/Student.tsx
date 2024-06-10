@@ -7,10 +7,14 @@ import studentStore from "../../stores/StudentStore";
 
 const Student = () => {
     const { login, profile } = authStore;
-    const { loadWorks } = studentStore;
+    const { loadWorks, loadTasks, loadCourses } = studentStore;
 
     useEffect(() => {
-        login('Фашист', '123').then(() => {loadWorks()});
+        login('Фашист', '123').then(() => {
+            loadCourses();
+            loadWorks();
+            loadTasks();
+        });
     })
     
     return (

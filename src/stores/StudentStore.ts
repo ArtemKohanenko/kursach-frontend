@@ -3,6 +3,8 @@ import { ISendWork, createWork, getStudentWorks } from "../api/works";
 import ITask from "../types/task";
 import { getStudentTasks } from "../api/task";
 import { IWork } from "../types/work";
+import ICourse from "../types/course";
+import { getStudentCourses } from "../api/course";
 
 class StudentStore {
     constructor() {
@@ -11,6 +13,9 @@ class StudentStore {
     
     @observable
     tasks: ITask[] = [];
+
+    @observable
+    courses: ICourse[] = [];
 
     @observable
     sendedWorks: IWork[] = [];
@@ -35,6 +40,25 @@ class StudentStore {
       });
     }
     };
+
+    @action
+    loadCourses = async (): Promise<void> => {
+      try {
+        this.loading = true;
+      
+        const { data } = await getStudentCourses();
+        
+        runInAction(() => {
+          this.courses = data.data;
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        runInAction(() => {
+          this.loading = false;
+        });
+      }
+    };
   
     @action
     loadWorks = async (): Promise<void> => {
@@ -45,7 +69,6 @@ class StudentStore {
       
       runInAction(() => {
         this.sendedWorks = data.data;
-        console.log(data.data)
       });
     } catch (error) {
       console.error(error);
@@ -58,24 +81,33 @@ class StudentStore {
 
   @action
   sendWork = async (params: ISendWork): Promise<void> => {
-      try {
-          this.loading = true;
+    try {
+        this.loading = true;
 
-          const { data } = await createWork(params);
+        const { data } = await createWork(params);
 
-          runInAction(() => {
-              // const work = data.data;
-              // this.sendedWorks.push(work);
-              this.loadWorks()
-          });
-      } catch (error) {
-          console.error(error);
-      } finally {
-          runInAction(() => {
-              this.loading = false;
-          });
-      }
-    };
+        runInAction(() => {
+            // const work = data.data;
+            // this.sendedWorks.push(work);
+            this.loadWorks()
+        });
+    } catch (error) {
+        console.error(error);
+    } finally {
+        runInAction(() => {
+            this.loading = false;
+        });
+    }
+  };
+
+  getTaskById = (id: string) => {
+    console.log(this.tasks)
+    return this.tasks.find(task => task.id == id)
+  }
+    
+  getCourseById = (id: string) => {
+    return this.courses.find(course => course.id == id)
+  }
 }
 
 const studentStore = new StudentStore();

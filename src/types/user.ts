@@ -3,8 +3,8 @@ import { ITeacher } from "./teacher";
 export interface IUser {
     id: string;
     name: string;
-    teacher?: ITeacher;
-    student?: IStudent;
+    // teacher?: ITeacher;
+    // student?: IStudent;
 }
 
 //export interface ITeacher {

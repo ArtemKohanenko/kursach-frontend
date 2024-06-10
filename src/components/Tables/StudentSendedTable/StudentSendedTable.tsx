@@ -10,7 +10,7 @@ import { observer } from "mobx-react-lite";
 
 // eslint-disable-next-line react-refresh/only-export-components
 const StudentSendedTable = () => {
-    const { sendedWorks , tasks } = studentStore;
+    const { sendedWorks, courses, tasks, getTaskById, getCourseById } = studentStore;
     const [showModal, setShowModal] = useState(false);
 
     const closeModal = () => {
@@ -49,10 +49,12 @@ const StudentSendedTable = () => {
         }
     });
     
-    const data = sendedWorks.map(sentWork => {
-        const teachersString = sentWork.task.course.teachers.map(teacher => teacher.user?.name).toString();
-        return [sentWork.task.name, sentWork.task.course.subject, teachersString, sentWork.status, sentWork.data]
-    })
+    const data = (sendedWorks.length>0 && courses.length>0 && tasks.length>0) ? sendedWorks.map(sentWork => {
+        const task = getTaskById(sentWork.taskId)!;
+        const course = getCourseById(task.courseId)!;
+        const teachersString = course.teachers?.map(teacher => teacher.user?.name).toString();
+        return [task.name, course.subject, teachersString, sentWork.status, sentWork.data]
+    }) : []
   
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const options: any = {

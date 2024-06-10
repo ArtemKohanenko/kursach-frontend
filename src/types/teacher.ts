@@ -9,5 +9,5 @@ export interface ITeacher {
     userId: string;
     // groups?: IGroup[];
     // tasks?: ITask[];
-    // user?: IUser;
+    user?: IUser;
 }
