@@ -9,3 +9,25 @@
 .header {
     background-color: $color-table-header;
 }
+
+.button {
+    width: 170px;
+    height: 45px;
+}
+
+.button:hover{
+    background: #8b83ba;
+}
+
+.button:active {
+    transition: 0.3s all;
+    transform: translateY(3px);
+    border: 1px solid transparent;
+    opacity: 0.8;
+}
+
+.add_button {
+    .button {
+
+    }
+}

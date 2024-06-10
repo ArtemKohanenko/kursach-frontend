@@ -1,7 +1,7 @@
 import ICourse from "./course";
+import { IStudent } from "./student";
 import ITask from "./task";
 import { ITeacher } from "./teacher";
-import { IStudent } from "./user";
 
 export interface IWork {
     id: string;
@@ -11,5 +11,5 @@ export interface IWork {
     taskId: string;
     studentId: string;
     // task?: ITask;    
-    // student?: IStudent;
+    student?: IStudent;
 }

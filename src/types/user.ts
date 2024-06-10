@@ -10,7 +10,3 @@ export interface IUser {
 //export interface ITeacher {
     //id: string;
 //}
-
-export interface IStudent {
-    id: string;
-}

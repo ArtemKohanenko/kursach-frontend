@@ -1,31 +1,123 @@
-import { DataGrid } from '@mui/x-data-grid/DataGrid';
-import classes from "./TeacherSendedTable.module.scss";
-import teacherStore from '../../../stores/TeacherStore';
+import MUIDataTable from "mui-datatables";
+import TableCell from '@mui/material/TableCell/TableCell';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import classes from './TeacherSendedTable.module.scss';
+import SendWorkModal from '../../Modals/SendWork/SendWorkModal';
+import { useState } from 'react';
+import studentStore from '../../../stores/StudentStore';
+import BigButton from "../../BigButton/BigButton";
+import { observer } from "mobx-react-lite";
+import teacherStore from "../../../stores/TeacherStore";
 
-
-const columns = [
-    { field: "task", headerName: "Task", flex: 1, headerClassName: classes.header,},
-    { field: "subject", headerName: "Subject", flex: 1, headerClassName: classes.header },
-    { field: "student", headerName: "Student", flex: 1, headerClassName: classes.header },
-    { field: "status", headerName: "Status", flex: 1, headerClassName: classes.header },
-    { field: "date", headerName: "Date", flex: 1, headerClassName: classes.header },
-  ];
-
+// eslint-disable-next-line react-refresh/only-export-components
 const TeacherSendedTable = () => {
-    const { sendedWorks } = teacherStore;
+    const { sendedWorks, courses, tasks, getTaskById, getCourseById } = teacherStore;
+    const [showModal, setShowModal] = useState(false);
+
+    const closeModal = () => {
+        setShowModal(false);
+    }
+
+    const openModal = () => {
+        setShowModal(true);
+    }
+
+    const columnNames = ["РАБОТА", "ДИСЦИПЛИНА", "ВЫПОЛНИЛ", "СТАТУС", "ДАННЫЕ"];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const columns: any = columnNames.map(colName => {
+        return {
+            name: colName,
+            options: {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                customHeadRender: ({ index, ...column }: any) => {
+                    return (
+                        <TableCell key={index} style={{ fontWeight: 'bold', color: '#6e6893' }}>
+                            {column.name}
+                        </TableCell>
+                    )
+                }
+            }
+        }
+    });
+    
+    const data = (sendedWorks.length>0 && courses.length>0 && tasks.length>0) ? sendedWorks.map(sentWork => {
+        const task = getTaskById(sentWork.taskId)!;
+        const course = getCourseById(task.courseId)!;
+        return [task.name, course.subject, sentWork.student?.user?.name, sentWork.status, sentWork.data]
+    }) : []
+  
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const options: any = {
+        filterType: "dropdown",
+        responsive: "scroll",
+        selectableRows : false,
+        expandableRows: false,
+        download: false,
+        print: false,
+        viewColumns: false,
+        filter: false,
+    };
+
+    const mainTableTheme = createTheme({
+        components: {
+            MuiPaper: {
+                styleOverrides: {
+                    root: {
+                        width: '1000px',
+                    }
+                }
+            },
+            MuiTableRow: {
+                styleOverrides: {
+                    root: {
+                        width: '1000px',
+                        borderBottom: '1px solid #d9d5ec',
+                    }
+                }
+            },
+            MUIDataTableSelectCell: {
+                styleOverrides: {
+                    fixedHeader: {
+                        backgroundColor: '#f4f2ff',
+                    }
+                }
+            },
+            MUIDataTableToolbar: {
+                styleOverrides: {
+                    actions: {
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'right',
+                        gap: '20px',
+                    }
+                }
+            },
+            MUIDataTableHeadRow: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: '#fff',
+                    }
+                }
+            }
+        }
+    })
+
+
     return (
-        <DataGrid
-            className={classes.table}
-            rows={sendedWorks}
-            columns={columns}
-            initialState={{
-                pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
-                },
-            }}
-            pageSizeOptions={[5, 10]}
-        />
-    );
+        <>
+            <ThemeProvider theme={mainTableTheme}>
+                <MUIDataTable
+                    title={""}
+                    data={data}
+                    columns={columns}
+                    options={options}
+                />
+            </ThemeProvider>
+            <SendWorkModal active={showModal} onClose={closeModal}></SendWorkModal>
+        </>
+    )
 }
 
-export default TeacherSendedTable;
+// eslint-disable-next-line react-refresh/only-export-components
+export default observer(TeacherSendedTable);
