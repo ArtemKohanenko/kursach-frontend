@@ -6,9 +6,13 @@ interface IGetCourses {
 }
 
 export const getCourses = () => {
-    return axios.get<IGetCourses>('/course');
+    return axios.get<IGetCourses>('/course/teacher');
 };
 
 export const deleteCourse = (courseId: string) => {
     return axios.delete(`/course/${courseId}`);
+};
+
+export const getStudentCourses = () => {
+    return axios.get<IGetCourses>('/course/student');
 };
