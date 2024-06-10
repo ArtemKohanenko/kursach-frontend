@@ -4,10 +4,11 @@ import TeacherManagementTable from "../../components/Tables/TeacherManagementTab
 import coursesStore from "../../stores/TeacherStore";
 
 const TeacherTasksManagement = () => {
-    const { loadCourses } = coursesStore;
+    const { loadCourses, loadTasks, loadGroups } = coursesStore;
 
     useEffect(() => {
         loadCourses();
+        loadTasks();
     })
 
     return (

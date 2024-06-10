@@ -23,6 +23,11 @@ export const getStudentTasks = () => {
     return axios.get<IGetTasksResponse>('/task/student');
 };
 
+export const getTeacherTasks = () => {
+    return axios.get<IGetTasksResponse>('/task/teacher');
+};
+
+
 export const createTask = (body: ICreateTask) => {
     return axios.post<ICreateTaskResponse>('/task', body);
 };

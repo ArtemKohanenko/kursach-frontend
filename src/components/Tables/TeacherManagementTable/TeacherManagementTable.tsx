@@ -2,7 +2,7 @@ import MUIDataTable from "mui-datatables";
 import TableRow from '@mui/material/TableRow/TableRow';
 import TableCell from '@mui/material/TableCell/TableCell';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import TaskSubtable from './TaskSubtable/TeacherManagementTable';
+import TaskSubtable from './TaskSubtable/TeacherManagementSubtable';
 import { observer } from 'mobx-react-lite';
 import { IoIosAddCircleOutline } from "react-icons/io";
 import IconButton from '@mui/material/IconButton/IconButton';
@@ -12,7 +12,7 @@ import CreateTaskModal from "../../Modals/CreateTaskModal/CreateTaskModal";
 import DeleteTaskModal from "../../Modals/DeleteTaskModal/DeleteTaskModal";
 
 const TeacherManagementTable = () => {
-  const { courses, createTask } = teacherStore;
+  const { courses, tasks, groups, createTask, getTasksByCourseId } = teacherStore;
 
   // Create Task for Course
   const [isShowCreateTaskModal, setIsShowCreateTaskModal] = useState(false);
@@ -63,7 +63,8 @@ const TeacherManagementTable = () => {
 
   const data = courses.map(course => {
     const groupsString = course.groups?.map(group => group.name).sort().toString();
-    return [ course.name, course.subject, groupsString, course.tasks?.length ]
+    console.log(course.groups)
+    return [ course.name, course.subject, groupsString, getTasksByCourseId(course.id).length ]
   })
   
   const options: any = {
@@ -79,7 +80,7 @@ const TeacherManagementTable = () => {
       return (
         <TableRow>
           <TableCell style = {{width: '1000px', padding: '0'}} colSpan={6}>
-            <TaskSubtable tasks={courses[rowMeta.rowIndex].tasks}/>
+            <TaskSubtable tasks={getTasksByCourseId(courses[rowMeta.rowIndex].id)}/>
           </TableCell>
         </TableRow>
       );
