@@ -4,7 +4,6 @@ import { IUser } from "./user";
 
 export interface ITeacher {
     id: string;
-    name: string;
     subject: string;
     userId: string;
     // groups?: IGroup[];
