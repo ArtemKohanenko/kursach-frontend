@@ -26,7 +26,7 @@ const StudentSendedTable = () => {
 
     const CustomHeaderButton = () => {
         return (
-            <div className={classes.add_button}>
+            <div>
                 <BigButton buttonClassName={classes.button} onClick={openModal}>Добавить</BigButton>
             </div>
         );

@@ -16,7 +16,7 @@
 }
 
 .button:hover{
-    background: blue;
+    background: #8b83ba;
 }
 
 .button:active {
@@ -24,4 +24,10 @@
     transform: translateY(3px);
     border: 1px solid transparent;
     opacity: 0.8;
+}
+
+.add_button {
+    .button {
+
+    }
 }

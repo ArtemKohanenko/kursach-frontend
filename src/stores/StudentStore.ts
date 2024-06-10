@@ -108,6 +108,10 @@ class StudentStore {
   getCourseById = (id: string) => {
     return this.courses.find(course => course.id == id)
   }
+
+  getTasksByCourseId = (id: string) => {
+    return this.tasks.filter(task => task.courseId == id)
+  }
 }
 
 const studentStore = new StudentStore();
