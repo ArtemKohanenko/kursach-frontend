@@ -1,9 +1,12 @@
 import { action, computed, makeObservable, observable, runInAction, toJS } from "mobx";
 import ICourse from "../types/course";
 import { deleteCourse, getCourses } from "../api/course";
-import { ICreateTask, createTask, deleteTask } from "../api/task";
+import { ICreateTask, createTask, deleteTask, getTeacherTasks } from "../api/task";
 import { IWork } from "../types/work";
 import ITask from "../types/task";
+import { getTeacherWorks } from "../api/works";
+import IGroup from "../types/group";
+import { getGroups } from "../api/group";
 
 class TeacherStore {
     constructor() {
@@ -16,18 +19,42 @@ class TeacherStore {
     @observable
     sendedWorks: IWork[] = []
 
+    @observable
+    tasks: ITask[] = [];
+
+    @observable
+    groups: IGroup[] = [];
+
     loading: boolean = false;
 
     @action
     loadCourses = async (): Promise<void> => {
+        try {
+        this.loading = true;
+        
+        const { data } = await getCourses();
+        
+        runInAction(() => {
+            this.courses = data.data;
+        });
+        } catch (error) {
+        console.error(error);
+        } finally {
+        runInAction(() => {
+            this.loading = false;
+        });
+        }
+    };
+
+    @action
+    loadSendedWorks = async (): Promise<void> => {
     try {
       this.loading = true;
     
-      const { data } = await getCourses();
+      const { data } = await getTeacherWorks();
       
       runInAction(() => {
-        this.courses = data.data;
-        console.log(this.courses)
+        this.sendedWorks = data.data;
       });
     } catch (error) {
       console.error(error);
@@ -37,6 +64,44 @@ class TeacherStore {
       });
     }
   };
+
+    @action
+    loadTasks = async (): Promise<void> => {
+        try {
+            this.loading = true;
+
+            const { data } = await getTeacherTasks();
+            
+            runInAction(() => {
+            this.tasks = data.data;
+            });
+        } catch (error) {
+            console.error(error);
+        } finally {
+            runInAction(() => {
+            this.loading = false;
+            });
+        }
+    };
+
+    @action
+    loadGroups = async (): Promise<void> => {
+        try {
+            this.loading = true;
+
+            const { data } = await getGroups();
+            
+            runInAction(() => {
+            this.groups = data.data;
+            });
+        } catch (error) {
+            console.error(error);
+        } finally {
+            runInAction(() => {
+                this.loading = false;
+            });
+        }
+    };
 
     @action
     deleteCourse = async (courseId: string): Promise<void> => {
@@ -70,9 +135,7 @@ class TeacherStore {
 
             runInAction(() => {
                 const task = data.data;
-                const courseId = task.course.id;
-
-                this.courses.find(course => course.id == courseId)?.tasks.push(task);
+                this.tasks.push(task);
             });
         } catch (error) {
             console.error(error);
@@ -93,17 +156,17 @@ class TeacherStore {
             runInAction(() => {
                 const status = data.status;
                 if (status == 200) {
-                    const course = this.courses.find(course => course.tasks.map(task => task.id).includes(taskId));
-                    console.log(course)
-                    if (course?.tasks) {
-                        course.tasks = course.tasks.filter(task => task.id != taskId);
+                    this.tasks = this.tasks.filter(task => task.id != taskId)
+                    // const course = this.courses.find(course => course.tasks.map(task => task.id).includes(taskId));
+                    // if (course?.tasks) {
+                    //     course.tasks = course.tasks.filter(task => task.id != taskId);
 
-                        for (let i=0; i < this.courses.length; i++) {
-                            if (this.courses[i].id == course.id) {
-                                this.courses[i] = course;
-                            }
-                        }
-                    }
+                    //     for (let i=0; i < this.courses.length; i++) {
+                    //         if (this.courses[i].id == course.id) {
+                    //             this.courses[i] = course;
+                    //         }
+                    //     }
+                    // }
                 }
             });
             
@@ -117,20 +180,16 @@ class TeacherStore {
         }
     };
 
+    getTasksByCourseId = (id: string) => {
+        return this.tasks.filter(task => task.courseId == id);
+    }
+
     getCourseById = (id: string) => {
         return this.courses.find(course => course.id == id)
     }
 
-    getCourseByTask = (taskId: string) => {
-        return this.courses.find(course => course.tasks.map(task => task.id).includes(taskId))
-    }
-
     getTaskById = (id: string) => {
-        let allTasks: ITask[] = []
-        for (let i=0; i<this.courses.length; i++) {
-            toJS(this.courses).forEach(course => course.tasks?.forEach(task => {allTasks.push(task)}))
-        }
-        return allTasks.find(task => task.id == id)
+        return this.tasks.find(course => course.id == id)
     }
 }
 

@@ -6,7 +6,8 @@ export interface ITeacher {
     id: string;
     name: string;
     subject: string;
-    groups: IGroup[];
-    tasks: ITask[];
-    user: IUser;
+    userId: string;
+    // groups?: IGroup[];
+    // tasks?: ITask[];
+    // user?: IUser;
 }

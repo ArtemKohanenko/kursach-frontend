@@ -6,7 +6,7 @@ export default interface ICourse {
     id: string;
     name: string;
     subject: string;
-    groups: IGroup[];
-    tasks: ITask[];    
-    teachers: ITeacher[];
+    groups?: IGroup[];
+    // tasks?: ITask[];    
+    // teachers?: ITeacher[];
 }

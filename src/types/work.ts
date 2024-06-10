@@ -8,6 +8,8 @@ export interface IWork {
     comment?: string;
     data: string;
     status: string;
-    task: ITask;    
-    student: IStudent;
+    taskId: string;
+    studentId: string;
+    // task?: ITask;    
+    // student?: IStudent;
 }
