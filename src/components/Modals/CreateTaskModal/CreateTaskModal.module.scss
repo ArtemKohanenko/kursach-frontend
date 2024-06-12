@@ -114,7 +114,7 @@
             
             button[type="submit"]:hover,
             input[type="submit"]:hover {
-                background: blue;
+                background: #6d5bd0;;
             }
             
             button[type="submit"]:active,
@@ -207,7 +207,7 @@
             
             button[type="submit"]:hover,
             input[type="submit"]:hover {
-                background: blue;
+                background: #8b83ba;
             }
             
             button[type="submit"]:active,
@@ -228,11 +228,11 @@
                 transition: 0.3s all;
             }
 
-            .sendbutton {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+            // .sendbutton {
+            //     display: flex;
+            //     align-items: center;
+            //     justify-content: center;
+            // }
         }
     }
 }

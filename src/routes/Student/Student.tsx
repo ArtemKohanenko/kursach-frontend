@@ -10,7 +10,7 @@ const Student = () => {
     const { loadWorks, loadTasks, loadCourses } = studentStore;
 
     useEffect(() => {
-        login('Фашист', '123').then(() => {
+        login('Поменяй Потом Имя', '123').then(() => {
             loadCourses();
             loadWorks();
             loadTasks();

@@ -16,7 +16,7 @@ const DeleteTaskModal = ({ taskId, active, onClose}: DeleteTaskModalProps) => {
         return null;
     }
 
-    const { getTaskById, getCourseByTask, deleteTask } = teacherStore;
+    const { getTaskById, getCourseById, deleteTask } = teacherStore;
 
     const onSubmit = () => {
         deleteTask(taskId);
@@ -24,7 +24,7 @@ const DeleteTaskModal = ({ taskId, active, onClose}: DeleteTaskModalProps) => {
     }
 
     const task = getTaskById(taskId);
-    const course = getCourseByTask(taskId);
+    const course = task ? getCourseById(task?.courseId) : null;
 
     return (
         <div className={classes.wrapper} onClick={onClose}>

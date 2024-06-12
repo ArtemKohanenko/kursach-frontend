@@ -52,9 +52,9 @@ const CreateTaskModal = ({ courseId, active, onClose}: CreateTaskModalProps) => 
                         Комментарий
                         <input {...register("comment", { required: true })}/>
                     </label>
-                    <div className={classes.sendbutton}>
+                    {/* <div className={classes.sendbutton}> */}
                         <input type='submit' disabled={!isValid}></input>
-                    </div>
+                    {/* </div> */}
                 </form>
             </div>
         </div>

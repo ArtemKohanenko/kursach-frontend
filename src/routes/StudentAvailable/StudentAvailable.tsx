@@ -9,10 +9,8 @@ import TeacherManagementTable from "../../components/Tables/TeacherManagementTab
 
 const StudentAvailable = () => {
     const { loadWorks, loadTasks, loadCourses } = studentStore;
-    console.log('[eq2')
 
     useEffect(() => {
-        console.log('хуй')
         loadCourses();
         loadWorks();
         loadTasks();

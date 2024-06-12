@@ -63,7 +63,6 @@ const TeacherManagementTable = () => {
 
   const data = courses.map(course => {
     const groupsString = course.groups?.map(group => group.name).sort().toString();
-    console.log(course.groups)
     return [ course.name, course.subject, groupsString, getTasksByCourseId(course.id).length ]
   })
   

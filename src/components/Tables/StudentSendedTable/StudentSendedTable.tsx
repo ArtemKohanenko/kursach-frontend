@@ -21,7 +21,7 @@ const StudentSendedTable = () => {
         setShowModal(true);
     }
 
-    const columnNames = ["РАБОТА", "ДИСЦИПЛИНА", "ПРЕПОДАВАТЕЛЬ", "СТАТУС", "ДАТА"];
+    const columnNames = ["РАБОТА", "ДИСЦИПЛИНА", "ПРЕПОДАВАТЕЛЬ", "СТАТУС", "ДАННЫЕ"];
 
 
     const CustomHeaderButton = () => {

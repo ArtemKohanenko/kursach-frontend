@@ -101,7 +101,6 @@ class StudentStore {
   };
 
   getTaskById = (id: string) => {
-    console.log(this.tasks)
     return this.tasks.find(task => task.id == id)
   }
     
